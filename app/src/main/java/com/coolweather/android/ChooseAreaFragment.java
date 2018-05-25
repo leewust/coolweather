@@ -114,7 +114,7 @@ public class ChooseAreaFragment extends Fragment {
                 if (currentLevel == LEVEL_COUNTY) {
                     queryCities();
                 } else if (currentLevel == LEVEL_CITY) {
-                    queryCounties();
+                    queryProvinces();
                 }
             }
         });
@@ -197,15 +197,15 @@ public class ChooseAreaFragment extends Fragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String reponseText = response.body().string();
+                String responseText = response.body().string();
                 boolean result = false;
                 if("province".equals(type)){
-                    result = Utility.handleProvinceResponse(reponseText);
+                    result = Utility.handleProvinceResponse(responseText);
 
                 } else if ("city".equals(type)) {
-                    result = Utility.handleCityResponse(reponseText,selectedProvince.getId());
+                    result = Utility.handleCityResponse(responseText,selectedProvince.getId());
                 } else if("county".equals(type)){
-                    result = Utility.handleCountyResponse(reponseText,selectedCity.getId());
+                    result = Utility.handleCountyResponse(responseText,selectedCity.getId());
                 }
                 if(result){
                     getActivity().runOnUiThread(new Runnable() {
